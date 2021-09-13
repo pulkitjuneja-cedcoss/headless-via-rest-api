@@ -7,7 +7,7 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 import axios from 'axios'
 import CheckoutPricingTable from "../templates/CheckoutPricingTable";
 // import { Link } from "gatsby"
-import CreateOrder from '../components/CreateOrder.js'
+import CreateOrder from '../components/order/CreateOrder.js'
 import Credit_debit_html from "../components/payments/stripe/credit_debit_html";
 
 

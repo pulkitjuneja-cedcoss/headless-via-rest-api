@@ -5,7 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import { Toast, ToastWrapper } from '@cedcommerce/ounce-ui'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import  { updateStatus }  from '../../orderStatus'
+import  { updateStatus }  from '../../order/orderStatus.js'
 
 
 const Credit_debit_html = (props) => {
@@ -68,7 +68,7 @@ const Credit_debit_html = (props) => {
                                 setToast(true);
                                 setToastType('success');
                                 setToastMessage('You have successfully made Payment.') 
-                                updateOrderStatus(orderResponse.data.id);
+                                updateOrderStatus(orderResponse.id);
                           
                             }).catch((error) => {
                                 console.log(error);
@@ -106,8 +106,8 @@ const Credit_debit_html = (props) => {
                         console.log(response);
                         setToast(true);
                         setToastType('success');
-                        setToastMessage('You have successfully made Payment. We are updating order status. Please Wait... ') 
-                        updateOrderStatus(orderResponse.data.id);
+                        setToastMessage('You have successfully made Payment.') 
+                        updateOrderStatus(orderResponse.id);
                     }).catch((error) => {
                         console.log(error);
                         setToast(true);
