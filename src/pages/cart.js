@@ -127,7 +127,7 @@ const Cart = () => {
             let pro = {
                'product_id': product.product_id, 'product_name': product.product_name, 'product_image': product.product_image, 'product_price': product.product_price,
                'product_subtotal': product.product_subtotal, 'product_type': product.product_type, 'quantity': product.quantity, 'currency_symbol': product.currency_symbol,
-               'variation_id': product.variation_id ? product.variation_id : null,
+               'variation_id': product.variation_id ? product.variation_id : 0,
             };
             cartProductsData.push(pro);
             return null;

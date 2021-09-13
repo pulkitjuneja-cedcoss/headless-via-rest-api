@@ -38,7 +38,7 @@ const Checkout = ({ location }) => {
    const [checkoutPricingTable, setCheckoutPricingTable] = useState({})
    // const [loading, setLoading] = useState(false);
    const [orderCreated, setOrderCreated] = useState(false);
-   // const [orderResponse, setOrderResponse] = useState(false);
+   const [orderResponse, setOrderResponse] = useState({});
    // const [modal, setModal] = useState(false);
    const [orderApiCalled, setOrderApiCalled] = useState(false);
    const [toastMessage, setToastMessage] = useState('');
@@ -350,15 +350,16 @@ const Checkout = ({ location }) => {
                                                          <p>Create your order now</p>
                                                          <button className="ced-headles-btn" onClick={() => {
                                                             let result = CreateOrder({ CustomerDetails, OrderItems })
-
-                                                            setOrderApiCalled(true);
-                                                            // result.then((response) => {
-                                                            //    console.log(response);
-                                                            setOrderCreated(true);
-
-                                                            // }).catch((error) => {
-                                                            //    console.log(error)
-                                                            // })
+                                                            result.then((response) => {
+                                                               console.log(response);
+                                                               setOrderCreated(true);
+                                                               setOrderApiCalled(true);
+                                                               setOrderResponse(response.data);
+                                                            }).catch((error) => {
+                                                               console.log(error);
+                                                               setOrderCreated(false);
+                                                               setOrderApiCalled(true);
+                                                            })
                                                          }}  >Create Order</button>
                                                       </div>)
 
@@ -367,15 +368,16 @@ const Checkout = ({ location }) => {
                                                          <p>Create your order now</p>
                                                          <button className="ced-headles-btn" onClick={() => {
                                                             let result = CreateOrder({ CustomerDetails, OrderItems })
-
-                                                            setOrderApiCalled(true);
-                                                            // result.then((response) => {
-                                                            //    console.log(response);
-                                                            setOrderCreated(true);
-
-                                                            // }).catch((error) => {
-                                                            //    console.log(error)
-                                                            // })
+                                                            result.then((response) => {
+                                                               console.log(response);
+                                                               setOrderCreated(true);
+                                                               setOrderResponse(response.data);
+                                                               setOrderApiCalled(true);
+                                                            }).catch((error) => {
+                                                               console.log(error);
+                                                               setOrderApiCalled(true);
+                                                               setOrderCreated(false);
+                                                            })
                                                          }}  >Create Order</button>
                                                       </div>
                                                       )
@@ -392,7 +394,7 @@ const Checkout = ({ location }) => {
                            }
                            {
                              // orderCreated ? (
-                                 <Credit_debit_html  addressParams= {saveAddressParams} checkoutPricingTable={ checkoutPricingTable } />
+                                 <Credit_debit_html  addressParams= {saveAddressParams} checkoutPricingTable={ checkoutPricingTable } orderResponse={orderResponse}/>
                                 // ) : (<></>)
                            }
                         </ul>

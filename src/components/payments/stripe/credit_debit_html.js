@@ -5,6 +5,7 @@ import 'font-awesome/css/font-awesome.min.css';
 import { Toast, ToastWrapper } from '@cedcommerce/ounce-ui'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import  { updateStatus }  from '../../orderStatus'
 
 
 const Credit_debit_html = (props) => {
@@ -18,7 +19,7 @@ const Credit_debit_html = (props) => {
     const [toastType, setToastType] = useState('none');
     const [toast, setToast] = useState(false);
 
-    const { checkoutPricingTable, addressParams } = props;
+    const { checkoutPricingTable, addressParams, orderResponse } = props;
     const cardData = { 'name': name, 'cardNumber': cardNumber, 'expMonth': expMonth, 'expYear': expYear, 'cvc': cvc };
 
     const current_date = new Date();
@@ -26,6 +27,15 @@ const Credit_debit_html = (props) => {
     const month = current_date.getMonth();
     const year = current_date.getFullYear();
 
+
+    const updateOrderStatus = (order_id) => {
+        let result = updateStatus(order_id);
+        result.then( (response) => {
+            console.log(response)
+        }).catch( (error) => {
+            console.log(error)
+        })
+    }
 
     const verifyCardDetails = () => {
 
@@ -57,7 +67,8 @@ const Credit_debit_html = (props) => {
                                 console.log(response);
                                 setToast(true);
                                 setToastType('success');
-                                setToastMessage('You have successfully made Payment. We are updating order status. Please Wait... ') 
+                                setToastMessage('You have successfully made Payment.') 
+                                updateOrderStatus(orderResponse.data.id);
                           
                             }).catch((error) => {
                                 console.log(error);
@@ -96,7 +107,7 @@ const Credit_debit_html = (props) => {
                         setToast(true);
                         setToastType('success');
                         setToastMessage('You have successfully made Payment. We are updating order status. Please Wait... ') 
-                  
+                        updateOrderStatus(orderResponse.data.id);
                     }).catch((error) => {
                         console.log(error);
                         setToast(true);
